@@ -8,23 +8,23 @@ namespace Server
     [Route("api/[controller]")]
     public class ArticleController : ControllerBase
     {
-        private readonly List<Article> _articles;
+        private readonly ArticleService _articleService;
 
-        public ArticleController()
+        public ArticleController(ArticleService articleService)
         {
-            _articles = new List<Article>();
+            _articleService = articleService;
         }
 
         [HttpPost("create")]
         public void CreateArticle(Article article)
         {
-            _articles.Add(article);
+            _articleService.Articles.Add(article);
         }
 
         [HttpGet("list")]
         public List<Article> GetArticles()
         {
-            return _articles;
+            return _articleService.Articles;
         }
     }
 }

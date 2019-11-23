@@ -9,6 +9,7 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<ArticleService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
