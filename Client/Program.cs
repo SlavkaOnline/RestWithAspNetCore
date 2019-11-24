@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Refit;
 
 namespace Client
 {
@@ -15,12 +16,16 @@ namespace Client
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    //services.AddHostedService<Worker>();
                     services.AddHttpClient("localhost", c =>
                     {
                         c.BaseAddress = new Uri("http://localhost:5000");
                         c.DefaultRequestHeaders.Add("Accept", "application/json");
                     });
+                    
+                    services.AddHostedService<WorkerWithRefit>();
+                    services.AddRefitClient<IArticlesApi>()
+                        .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5000"));
                 });
     }
 }
