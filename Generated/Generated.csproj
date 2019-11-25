@@ -20,7 +20,7 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="NSwag" BeforeTargets="PrepareForBuild">
+  <Target Name="NSwag" BeforeTargets="PrepareForBuild" Condition="'$(GenerateCode)'=='True'">
     <Exec Command="$(NSwagExe_Core30) openapi2csclient /input:Contract.yaml /namespace:Generated.Client /classname:ArticleClient /output:ArticleClient.cs" />
     <Exec Command="$(NSwagExe_Core30) openapi2cscontroller /input:Contract.yaml /namespace:Generated.Controller /classname:ArticleController /output:ArticleController.cs /controllerBaseClass:Microsoft.AspNetCore.Mvc.ControllerBase /controllerStyle:abstract" />
   </Target>
