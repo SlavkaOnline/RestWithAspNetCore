@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Contract.yaml" />
+    <Content Include="Contract.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="NSwag" BeforeTargets="PrepareForBuild">
+    <Exec Command="$(NSwagExe_Core30) openapi2csclient /input:Contract.yaml /namespace:Generated.Client /classname:ArticleClient /output:ArticleClient.cs" />
+    <Exec Command="$(NSwagExe_Core30) openapi2cscontroller /input:Contract.yaml /namespace:Generated.Controller /classname:ArticleController /output:ArticleController.cs /controllerBaseClass:Microsoft.AspNetCore.Mvc.ControllerBase /controllerStyle:abstract" />
+  </Target>
+
+</Project>

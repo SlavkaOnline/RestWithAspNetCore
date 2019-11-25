@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  title: Blog API
+  description: API for working with blog
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Localhost server
+paths:
+  /api/article/create:
+    post:
+      summary: Create a new article in a blog.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Create
+  /api/article/list:
+    get:
+      summary: Return a list of articles.
+      responses:
+        '200':
+          description: A JSON array of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
