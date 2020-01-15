@@ -37,4 +37,11 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    author:
+                      type: string
+                    content:
+                      type: string
