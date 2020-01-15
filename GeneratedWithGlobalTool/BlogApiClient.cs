@@ -1,6 +1,7 @@
 namespace GeneratedWithGlobalTool
 {
-    public partial class ContractClient
+    public partial class BlogApiClient
     {
+        
     }
 }

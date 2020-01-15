@@ -8,12 +8,12 @@ namespace GeneratedWithGlobalTool
     {
         public static async Task Main(string[] args)
         {
-            var client = new ContractClient(new HttpClient());
+            var client = new BlogApiClient(new HttpClient());
             Console.ReadKey();
-            var body = new Body { Title = "Title", Author = "Author", Content = "Content"};
-            await client.CreateAsync(body);
+            var newArticle = new Article { Title = "Title", Author = "Author", Content = "Content"};
+            await client.CreateArticleAsync(newArticle);
             Console.ReadKey();
-            var articles = await client.ListAsync();
+            var articles = await client.GetArticlesAsync();
             foreach (var article in articles)
             {
                 Console.WriteLine($"Article '{article.Title}' by {article.Author}");
